@@ -1,8 +1,5 @@
 package com.haojianuo.eng;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -138,14 +135,34 @@ public class Main {
             }
 
         });
-        int i=0;
-        for (Map.Entry<String, Integer> mapping : list) {
 
-            if(i%10==0){System.out.println(":" + mapping.getValue());System.out.print(""+i+":  ");}
-            System.out.print(mapping.getKey() +"  ");
+            try {
+                File writename = new File(System.getProperty("user.dir")+"/db/WordFrq.txt");
+                writename.createNewFile();
+                BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+                int i=0;
+                for (Map.Entry<String, Integer> mapping : list) {
 
-            i=i+1;
-        }
+                    if(i%10==0){
+                        System.out.println(":" + mapping.getValue());
+                        out.write(":" + mapping.getValue());
+                        out.write("\r\n");
+                        System.out.print(""+i+":  ");
+                        out.write(""+i+":  ");
+                    }
+                    System.out.print(mapping.getKey() +"  ");
+
+                    out.write(mapping.getKey() +"  ");
+
+                    i=i+1;
+                }
+                out.flush();
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
     }
 
 }
