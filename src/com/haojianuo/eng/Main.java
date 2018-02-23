@@ -70,10 +70,12 @@ public class Main {
                     for (int i = 0; i < al.length; i++) {
                         j++;
                         al[i]=al[i].toLowerCase();
+                        al[i]=al[i].replace("--","");
                         if(al[i].indexOf("-")==0){al[i]=al[i].replace("-","");}
                         if(al[i].indexOf("'")==0){al[i]=al[i].replace("'","");}
                         if(al[i].indexOf("'")==al[i].length()-1){al[i]=al[i].replace("'","");}
                         if(al[i].indexOf("-")==al[i].length()-1){al[i]=al[i].replace("-","");}
+                        if(al[i].indexOf("'s")==al[i].length()-2){al[i]=al[i].replace("'s","");}
                         String  t=al[i].replace("'","");
                         t=t.replace("-","");
                         if(!t.matches("[a-z]+")) continue;
